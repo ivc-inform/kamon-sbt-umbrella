@@ -17,7 +17,6 @@ object KamonSbtUmbrella extends AutoPlugin {
 
   override def projectSettings: Seq[_root_.sbt.Def.Setting[_]] = Seq(
     scalaVersion := scalaVersionSetting.value,
-    crossScalaVersions := crossScalaVersionsSetting.value,
     version := versionSetting.value,
     isSnapshot := isSnapshotVersion(version.value),
     organization := "io.kamon",
@@ -53,19 +52,12 @@ object KamonSbtUmbrella extends AutoPlugin {
   )
 
   object autoImport {
-    val aspectJ        = "org.aspectj"      % "aspectjweaver"   % "1.8.10"
-    val hdrHistogram   = "org.hdrhistogram" % "HdrHistogram"    % "2.1.9"
-    val slf4jApi       = "org.slf4j"        % "slf4j-api"       % "1.7.7"
-    val slf4jnop       = "org.slf4j"        % "slf4j-nop"       % "1.7.7"
-    val logbackClassic = "ch.qos.logback"   % "logback-classic" % "1.0.13"
-    val scalatest      = "org.scalatest"    %% "scalatest"      % "3.0.1"
-
-    def akkaDependency(moduleName: String) = Def.setting {
-      scalaBinaryVersion.value match {
-        case "2.10" | "2.11" => "com.typesafe.akka" %% s"akka-$moduleName" % "2.3.15"
-        case "2.12"          => "com.typesafe.akka" %% s"akka-$moduleName" % "2.4.14"
-      }
-    }
+    val aspectJ        = "org.aspectj"      % "aspectjweaver"   % "1.9.0.RC2"
+    val hdrHistogram   = "org.hdrhistogram" % "HdrHistogram"    % "2.1.10"
+    val slf4jApi       = "org.slf4j"        % "slf4j-api"       % "1.7.25"
+    val slf4jnop       = "org.slf4j"        % "slf4j-nop"       % "1.7.25"
+    val logbackClassic = "ch.qos.logback"   % "logback-classic" % "1.2.3"
+    val scalatest      = "org.scalatest"    %% "scalatest"      % "3.0.4"
 
     def compileScope(deps: ModuleID*): Seq[ModuleID]  = deps map (_ % "compile")
     def testScope(deps: ModuleID*): Seq[ModuleID]     = deps map (_ % "test")
@@ -88,11 +80,7 @@ object KamonSbtUmbrella extends AutoPlugin {
   }
 
   private def scalaVersionSetting = Def.setting {
-    if (sbtPlugin.value) scalaVersion.value else "2.12.1"
-  }
-
-  private def crossScalaVersionsSetting = Def.setting {
-    if (sbtPlugin.value) Seq(scalaVersion.value) else Seq("2.10.6", "2.11.8", "2.12.1")
+    if (sbtPlugin.value) scalaVersion.value else "2.12.4"
   }
 
   private def versionSetting = Def.setting {

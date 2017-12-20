@@ -1,6 +1,6 @@
 unmanagedSourceDirectories in Compile += baseDirectory.value.getParentFile / "src" / "main" / "scala"
 
-addSbtPlugin("com.typesafe.sbt" % "sbt-aspectj" % "0.10.6")
+addSbtPlugin("com.lightbend.sbt" % "sbt-aspectj" % "0.11.0")
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.4")
 addSbtPlugin("com.geirsson" % "sbt-scalafmt" % "0.5.2-RC1")
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.8.1")
